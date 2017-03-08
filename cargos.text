@@ -1,0 +1,38 @@
+-------
+cargos
+-------
+
+I 	= lider de comunidad
+ubch
+una_mujer
+ffm = frente francisco de miranda
+l_ccomunal = concejo comunal
+milicia
+
+
+variales que se queda:
+--------------------------
+tablas nueva de los claps
+--------------------------
+id
+codigo_clap
+nombre_clap
+id_estado
+id_municipio
+id_parroquia
+comunidad
+cargo
+tipo
+cedula
+nombre_apellido
+telefono
+estatus -> registrado 1 | no registrado 2
+---------------------------
+
+Pasos:
+-------
+1. Se hace primero un foreach con la tabla de los calp
+
+2. Se
+
+

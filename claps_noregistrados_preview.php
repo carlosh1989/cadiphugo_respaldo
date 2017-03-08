@@ -19,7 +19,7 @@ new Eloquent();
 extract($_GET);
 extract($_POST);
 
-$integrantes = Clap2::where('id_estado','1')->where('id_municipio',$municipio)->where('id_parroquia',$parroquia)->get();
+$integrantes = Clap2::where('estado_id','1')->where('municipio_id',$municipio)->where('parroquia_id',$parroquia)->where('registrado',0)->get();
 ?>
                 <div class="page-body">
                     <div class="row">
@@ -27,12 +27,10 @@ $integrantes = Clap2::where('id_estado','1')->where('id_municipio',$municipio)->
                                 <h5 class="row-title before-darkorange"><i class="fa fa-list-alt darkorange"></i>Busquedas segun municipio, parroquia y bodega</h5>
                             </div>
                             <div class="col-lg-12 col-sm-12 col-xs-12">
-                            <a class="btn btn-danger btn-lg pull-right" href="solo_pdf.php?municipio=<?php echo $municipio ?>&parroquia=<?php echo $parroquia ?>&bodega=<?php echo $bodega ?>"><i class="fa fa-download" aria-hidden="true"></i> Descargar PDF</a>
+                            <a class="btn btn-danger btn-lg pull-right" href="solo_pdf.php?municipio=<?php echo $municipio ?>&parroquia=<?php echo $parroquia ?>"><i class="fa fa-download" aria-hidden="true"></i> Descargar PDF</a>
                             <hr>
-                            <h3 align="center">Personas solas</h3>
-                            <?php
-                            $jefes = Jefe::where('n_personas',1)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega)->orderBy('edad', 'desc')->get();
-                            ?>
+                            <h3 align="center">Integrantes no registrados</h3>
+                    
                               
 
                             </div>

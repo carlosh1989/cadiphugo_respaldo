@@ -98,8 +98,8 @@ $(document).ready(function(){
    $("#parroquiaC").change(function () {
            $("#parroquiaC option:selected").each(function () {
             idparroquia = $(this).val();
-            $.post("bodegas.php", { idparroquia:idparroquia }, function(data){
-                $("#bodegaC").html(data);
+            $.post("claps.php", { idparroquia:idparroquia }, function(data){
+                $("#clapC").html(data);
             }); 
             window.console&&console.log(idparroquia);           
         });
@@ -137,8 +137,8 @@ $(document).ready(function(){
                                                 </select>
                                 
                                     
-                                             <!--   <select name="bodega" id="bodegaC">
-                                                </select> -->
+                                                <select name="clap" id="clapC">
+                                                </select>
                                         
                                         
                                         <hr>

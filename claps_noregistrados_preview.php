@@ -12,14 +12,17 @@ $(document).ready(function(){
 //SECCIÓN DE CARGA DE LIBRERIAS Y MODELOS
 require('autoload.php');
 use DB\Eloquent;
+use Models\Cargo;
 use Models\Clap2;
 use Models\Jefe;
+use Models\Municipio;
+use Models\Parroquia;
 new Eloquent();
 
 extract($_GET);
 extract($_POST);
 
-$integrantes = Clap2::where('estado_id','1')->where('municipio_id',$municipio)->where('parroquia_id',$parroquia)->where('registrado',0)->get();
+$integrantes = Clap2::where('registrado',0)->get();
 ?>
                 <div class="page-body">
                     <div class="row">
@@ -27,7 +30,7 @@ $integrantes = Clap2::where('estado_id','1')->where('municipio_id',$municipio)->
                                 <h5 class="row-title before-darkorange"><i class="fa fa-list-alt darkorange"></i>Busquedas segun municipio, parroquia y bodega</h5>
                             </div>
                             <div class="col-lg-12 col-sm-12 col-xs-12">
-                            <a class="btn btn-danger btn-lg pull-right" href="solo_pdf.php?municipio=<?php echo $municipio ?>&parroquia=<?php echo $parroquia ?>"><i class="fa fa-download" aria-hidden="true"></i> Descargar PDF</a>
+                            <a class="btn btn-danger btn-lg pull-right" href="solo_pdf.php?municipio=<?php echo $municipio ?>&parroquia=<?php echo "asd" ?>"><i class="fa fa-download" aria-hidden="true"></i> Descargar PDF</a>
                             <hr>
                             <h3 align="center">Integrantes no registrados</h3>
                     
@@ -74,7 +77,13 @@ $integrantes = Clap2::where('estado_id','1')->where('municipio_id',$municipio)->
                                                     cargo
                                                 </th>
                                                 <th>
-                                                    ubicado
+                                                    Municipio
+                                                </th>
+                                                <th>
+                                                    Parroquia
+                                                </th>
+                                                <th>
+                                                    Comunidad
                                                 </th>
                                             </tr>
                                         </thead>
@@ -83,7 +92,7 @@ $integrantes = Clap2::where('estado_id','1')->where('municipio_id',$municipio)->
                                             <?php foreach ($integrantes as $integrante): ?>
                                             <tr>
                                                 <td>
-                                                <?php echo $integrante->codigo_clap ?>
+                                                <?php echo $integrante->clap_codigo ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $integrante->nombre_apellido ?>
@@ -95,10 +104,25 @@ $integrantes = Clap2::where('estado_id','1')->where('municipio_id',$municipio)->
                                                     <?php echo $integrante->telefono ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $integrante->cargo ?>
+                                                <?php 
+                                                $cargo = Cargo::find($integrante->cargo_id);
+                                                ?>
+                                                    <?php echo $cargo->cargo ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $integrante->ubicado ?>
+                                                <?php 
+                                                $municipio = Municipio::find($integrante->municipio_id);
+                                                ?>
+                                                    <?php echo $municipio->nombre_municipio ?>
+                                                </td>
+                                                <td>
+                                                <?php 
+                                                $parroquia = Parroquia::find($integrante->parroquia_id);
+                                                ?>
+                                                    <?php echo $parroquia->nombre_parroquia ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $integrante->comunidad ?>
                                                 </td>
                                             </tr>
                                             <?php $num = $num + 1 ?>

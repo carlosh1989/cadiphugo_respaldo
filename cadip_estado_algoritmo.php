@@ -37,8 +37,8 @@ foreach ($claps as $clap)
 
 		if($clapA)
 		{
-			$jefeUbicacion = Jefe::where('cod_municipio', $clapA->id_municipio)->where('cod_parroquia', $clapA->id_parroquia)->first();
-			$familiarUbicacion = Familia::where('cod_municipio', $clapA->id_municipio)->where('cod_parroquia', $clapA->id_parroquia)->first();
+			$jefeUbicacion = Jefe::where('cod_municipio', $clapA->municipio_id)->where('cod_parroquia', $clapA->parroquia_id)->first();
+			$familiarUbicacion = Familia::where('cod_municipio', $clapA->municipio_id)->where('cod_parroquia', $clapA->parroquia_id)->first();
 
 			if($clapA->registrado == true)
 			{
@@ -72,6 +72,22 @@ foreach ($claps as $clap)
 				echo "\033[32m -> No Ubicado \033[0m";
 				$clapA->save();
 			}
+
+			if($jefe)
+			{
+				$clapA->bodega_id = $jefe->bodega;
+				$clapA->save();
+				echo "\033[32m -> Bodega: ".$clapA->bodega_id." \033[0m";
+			}
+			else
+			{
+				if($familiar)
+				{
+					$clapA->bodega_id = $familiar->bodega;
+					$clapA->save();
+					echo "\033[32m -> Bodega: ".$clapA->bodega_id." \033[0m";
+				}
+			}
 		}
 		else
 		{
@@ -82,6 +98,7 @@ foreach ($claps as $clap)
 				'parroquia_id'	 => $clap->id_parroquia,
 				'clap_codigo' 	 => $clap->codigo_clap,
 				'clap_nombre' 	 => $clap->nombre_clap, 
+				'bodega_id'		 => '',
 				'comunidad'   	 => $clap->comunidad, 
 				'cargo_id'       	 => '1',
 				'tipo'        	 => $clap->tipo_comunidad,
@@ -137,8 +154,8 @@ foreach ($claps as $clap)
 
 		if($clapB)
 		{
-			$jefeUbicacion = Jefe::where('cod_municipio', $clapB->id_municipio)->where('cod_parroquia', $clapB->id_parroquia)->first();
-			$familiarUbicacion = Familia::where('cod_municipio', $clapB->id_municipio)->where('cod_parroquia', $clapB->id_parroquia)->first();
+			$jefeUbicacion = Jefe::where('cod_municipio', $clapB->municipio_id)->where('cod_parroquia', $clapB->parroquia_id)->first();
+			$familiarUbicacion = Familia::where('cod_municipio', $clapB->municipio_id)->where('cod_parroquia', $clapB->parroquia_id)->first();
 
 			if($clapA->registrado == true)
 			{
@@ -169,8 +186,25 @@ foreach ($claps as $clap)
 			else
 			{
 				$clapA->ubicado = 0;
-				echo "\033[32m -> No Registrado \033[0m";echo "\033[32m -> No Ubicado \033[0m";
+				echo "\033[32m -> No Registrado \033[0m";
+				echo "\033[32m -> No Ubicado \033[0m";
 				$clapA->save();
+			}
+
+			if($jefe)
+			{
+				$clapB->bodega_id = $jefe->bodega;
+				$clapB->save();
+				echo "\033[32m -> Bodega: ".$clapB->bodega_id." \033[0m";
+			}
+			else
+			{
+				if($familiar)
+				{
+					$clapB->bodega_id = $familiar->bodega;
+					$clapB->save();
+					echo "\033[32m -> Bodega: ".$clapB->bodega_id." \033[0m";
+				}
 			}
 		}
 		else
@@ -182,6 +216,7 @@ foreach ($claps as $clap)
 				'parroquia_id'	 => $clap->id_parroquia,
 				'clap_codigo' 	 => $clap->codigo_clap,
 				'clap_nombre' 	 => $clap->nombre_clap, 
+				'bodega_id'		 => '',
 				'comunidad'   	 => $clap->comunidad, 
 				'cargo_id'       	 => '2',
 				'tipo'        	 => $clap->tipo_ubch,
@@ -237,8 +272,8 @@ foreach ($claps as $clap)
 
 		if($clapC)
 		{
-			$jefeUbicacion = Jefe::where('cod_municipio', $clapC->id_municipio)->where('cod_parroquia', $clapC->id_parroquia)->first();
-			$familiarUbicacion = Familia::where('cod_municipio', $clapC->id_municipio)->where('cod_parroquia', $clapC->id_parroquia)->first();
+			$jefeUbicacion = Jefe::where('cod_municipio', $clapC->municipio_id)->where('cod_parroquia', $clapC->parroquia_id)->first();
+			$familiarUbicacion = Familia::where('cod_municipio', $clapC->municipio_id)->where('cod_parroquia', $clapC->parroquia_id)->first();
 
 			if($clapC->registrado == true)
 			{
@@ -272,6 +307,22 @@ foreach ($claps as $clap)
 				echo "\033[32m -> No Ubicado \033[0m";
 				$clapC->save();
 			}
+
+			if($jefe)
+			{
+				$clapC->bodega_id = $jefe->bodega;
+				$clapC->save();
+				echo "\033[32m -> Bodega: ".$clapC->bodega_id." \033[0m";
+			}
+			else
+			{
+				if($familiar)
+				{
+					$clapC->bodega_id = $familiar->bodega;
+					$clapC->save();
+					echo "\033[32m -> Bodega: ".$clapC->bodega_id." \033[0m";
+				}
+			}
 		}
 		else
 		{
@@ -282,6 +333,7 @@ foreach ($claps as $clap)
 				'parroquia_id'	 => $clap->id_parroquia,
 				'clap_codigo' 	 => $clap->codigo_clap,
 				'clap_nombre' 	 => $clap->nombre_clap, 
+				'bodega_id'		 => '',
 				'comunidad'   	 => $clap->comunidad, 
 				'cargo_id'       	 => '3',
 				'tipo'        	 => $clap->tipo_unamujer,
@@ -337,8 +389,8 @@ foreach ($claps as $clap)
 
 		if($clapD)
 		{
-			$jefeUbicacion = Jefe::where('cod_municipio', $clapD->id_municipio)->where('cod_parroquia', $clapD->id_parroquia)->first();
-			$familiarUbicacion = Familia::where('cod_municipio', $clapD->id_municipio)->where('cod_parroquia', $clapD->id_parroquia)->first();
+			$jefeUbicacion = Jefe::where('cod_municipio', $clapD->municipio_id)->where('cod_parroquia', $clapD->parroquia_id)->first();
+			$familiarUbicacion = Familia::where('cod_municipio', $clapD->municipio_id)->where('cod_parroquia', $clapD->parroquia_id)->first();
 
 			if($clapD->registrado == true)
 			{
@@ -372,6 +424,22 @@ foreach ($claps as $clap)
 				echo "\033[32m -> No Ubicado \033[0m";
 				$clapD->save();
 			}
+
+			if($jefe)
+			{
+				$clapD->bodega_id = $jefe->bodega;
+				$clapD->save();
+				echo "\033[32m -> Bodega: ".$clapD->bodega_id." \033[0m";
+			}
+			else
+			{
+				if($familiar)
+				{
+					$clapD->bodega_id = $familiar->bodega;
+					$clapD->save();
+					echo "\033[32m -> Bodega: ".$clapD->bodega_id." \033[0m";
+				}
+			}
 		}
 		else
 		{
@@ -382,6 +450,7 @@ foreach ($claps as $clap)
 				'parroquia_id'	 => $clap->id_parroquia,
 				'clap_codigo' 	 => $clap->codigo_clap,
 				'clap_nombre' 	 => $clap->nombre_clap, 
+				'bodega_id'		 => '',
 				'comunidad'   	 => $clap->comunidad, 
 				'cargo_id'       	 => '4',
 				'tipo'        	 => $clap->tipo_ffm,
@@ -437,8 +506,8 @@ foreach ($claps as $clap)
 
 		if($clapE)
 		{
-			$jefeUbicacion = Jefe::where('cod_municipio', $clapE->id_municipio)->where('cod_parroquia', $clapE->id_parroquia)->first();
-			$familiarUbicacion = Familia::where('cod_municipio', $clapE->id_municipio)->where('cod_parroquia', $clapE->id_parroquia)->first();
+			$jefeUbicacion = Jefe::where('cod_municipio', $clapE->municipio_id)->where('cod_parroquia', $clapE->parroquia_id)->first();
+			$familiarUbicacion = Familia::where('cod_municipio', $clapE->municipio_id)->where('cod_parroquia', $clapE->parroquia_id)->first();
 
 			if($clapE->registrado == true)
 			{
@@ -472,6 +541,22 @@ foreach ($claps as $clap)
 				echo "\033[32m -> No Ubicado \033[0m";
 				$clapE->save();
 			}
+
+			if($jefe)
+			{
+				$clapE->bodega_id = $jefe->bodega;
+				$clapE->save();
+				echo "\033[32m -> Bodega: ".$clapE->bodega_id." \033[0m";
+			}
+			else
+			{
+				if($familiar)
+				{
+					$clapE->bodega_id = $familiar->bodega;
+					$clapE->save();
+					echo "\033[32m -> Bodega: ".$clapE->bodega_id." \033[0m";
+				}
+			}
 		}
 		else
 		{
@@ -482,6 +567,7 @@ foreach ($claps as $clap)
 				'parroquia_id'	 => $clap->id_parroquia,
 				'clap_codigo' 	 => $clap->codigo_clap,
 				'clap_nombre' 	 => $clap->nombre_clap, 
+				'bodega_id'		 => '',
 				'comunidad'   	 => $clap->comunidad, 
 				'cargo_id'       	 => '5',
 				'tipo'        	 => $clap->tipo_ccomunal,
@@ -536,8 +622,8 @@ foreach ($claps as $clap)
 
 		if($clapF)
 		{
-			$jefeUbicacion = Jefe::where('cod_municipio', $clapF->id_municipio)->where('cod_parroquia', $clapF->id_parroquia)->first();
-			$familiarUbicacion = Familia::where('cod_municipio', $clapF->id_municipio)->where('cod_parroquia', $clapF->id_parroquia)->first();
+			$jefeUbicacion = Jefe::where('cod_municipio', $clapF->municipio_id)->where('cod_parroquia', $clapF->parroquia_id)->first();
+			$familiarUbicacion = Familia::where('cod_municipio', $clapF->municipio_id)->where('cod_parroquia', $clapF->parroquia_id)->first();
 
 			if($clapF->registrado == true)
 			{
@@ -571,6 +657,22 @@ foreach ($claps as $clap)
 				echo "\033[32m -> No Ubicado \033[0m";
 				$clapF->save();
 			}
+
+			if($jefe)
+			{
+				$clapF->bodega_id = $jefe->bodega;
+				$clapF->save();
+				echo "\033[32m -> Bodega: ".$clapF->bodega_id." \033[0m";
+			}
+			else
+			{
+				if($familiar)
+				{
+					$clapF->bodega_id = $familiar->bodega;
+					$clapF->save();
+					echo "\033[32m -> Bodega: ".$clapF->bodega_id." \033[0m";
+				}
+			}
 		}
 		else
 		{
@@ -581,6 +683,7 @@ foreach ($claps as $clap)
 				'parroquia_id'	 => $clap->id_parroquia,
 				'clap_codigo' 	 => $clap->codigo_clap,
 				'clap_nombre' 	 => $clap->nombre_clap, 
+				'bodega_id'		 => '',
 				'comunidad'   	 => $clap->comunidad, 
 				'cargo_id'       	 => '6',
 				'tipo'        	 => $clap->tipo_milicia,

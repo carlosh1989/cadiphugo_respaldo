@@ -488,6 +488,7 @@ class ComposerStaticInit741d840ceac3b27d4d7bed2a2d9ca6da
         'Illuminate\\Support\\ViewErrorBag' => __DIR__ . '/..' . '/illuminate/support/ViewErrorBag.php',
         'MYANMAR' => __DIR__ . '/..' . '/mpdf/mpdf/classes/myanmar.php',
         'Models\\Bodega' => __DIR__ . '/../..' . '/db/models/Bodega.php',
+        'Models\\BodegaComparacion' => __DIR__ . '/../..' . '/db/models/BodegaComparacion.php',
         'Models\\Cargo' => __DIR__ . '/../..' . '/db/models/Cargo.php',
         'Models\\Clap' => __DIR__ . '/../..' . '/db/models/Clap.php',
         'Models\\Clap2' => __DIR__ . '/../..' . '/db/models/Clap2.php',

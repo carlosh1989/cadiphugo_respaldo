@@ -9,7 +9,7 @@ extract($_GET);
 extract($_POST);
 
 
-$jefes = Jefe::where('n_personas', '>', 1)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega)->orderBy('edad', 'desc')->get();
+$jefes = Jefe::where('n_personas', '>', 1)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega)->where('eliminar',0)->orderBy('edad', 'desc')->get();
 $jefe = Jefe::where('bodega', $bodega)->first();
 //\krumo::dump($solos);
 ?>

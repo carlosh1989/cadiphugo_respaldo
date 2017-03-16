@@ -351,6 +351,7 @@ return array(
     'Illuminate\\Support\\ViewErrorBag' => $vendorDir . '/illuminate/support/ViewErrorBag.php',
     'MYANMAR' => $vendorDir . '/mpdf/mpdf/classes/myanmar.php',
     'Models\\Bodega' => $baseDir . '/db/models/Bodega.php',
+    'Models\\BodegaComparacion' => $baseDir . '/db/models/BodegaComparacion.php',
     'Models\\Cargo' => $baseDir . '/db/models/Cargo.php',
     'Models\\Clap' => $baseDir . '/db/models/Clap.php',
     'Models\\Clap2' => $baseDir . '/db/models/Clap2.php',

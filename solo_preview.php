@@ -106,7 +106,7 @@ $solos = Jefe::where('n_personas',1)->where('cod_municipio',$municipio)->where('
                                                 <?php
                                                 //Por generar - gris
                                                  if ($jefe->certificacion_solo == 0): ?>
-                                                    <a href="solo_constancia_pdf.php?municipio=<?php echo $municipio ?>&parroquia=<?php echo $parroquia ?>&bodega=<?php echo $bodega ?>&cedula=<?php echo $jefe->cedula ?>" class="btn btn-labeled">
+                                                    <a href="solo_constancia_pdf.php?municipio=<?php echo $municipio ?>&parroquia=<?php echo $parroquia ?>&bodega=<?php echo $bodega ?>&cedula=<?php echo $jefe->cedula ?>" class="btn btn-labeled"onClick="window.location.reload(false)" target="_blank">
                                                         <i class="btn-label fa fa-print"></i>Generar
                                                     </a>
                                                 <?php endif ?>

@@ -8,6 +8,7 @@ class Jefe extends Model {
 	public $timestamps = false;
     protected $table = 'registro_estudio_datos_del_encuestado';
 	protected $primaryKey = 'id';
+    protected $fillable = ['certificacion_solo'];
     //Ejemplo de definir campos
 
 	public function familia()

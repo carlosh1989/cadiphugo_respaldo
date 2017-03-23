@@ -121,7 +121,7 @@ $(document).ready(function(){
                                     <div class="col-lg-12 col-sm-12 col-xs-12">
                                         <div class="well with-header">
                                             <div class="header bordered-green"><li class="fa fa-user fa-2x red-text"></li> Busqueda de las personas solas</div>
-                                        <form action="solo_preview.php" method="POST">
+                                        <form action="solo_preview.php" method="GET">
                                             
                                                 <?php $municipios = Municipio::all(); ?>
                                                 <select name="municipio" id="municipioC">

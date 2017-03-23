@@ -1,9 +1,25 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
+use DB\Eloquent;
+use Models\Jefe;
+new Eloquent();
 $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 extract($_GET);
+
+//VERIFICANDO SI SE GENERO EL REPORTE
+$certificado = Jefe::where('cedula',$cedula)->get();
+
+if($certificado)
+{
+
+}
+else
+{
+	$certificado->certificacion_solo = 1;
+}
+
 $mpdf = new mPDF('','Letter',11,'arial');
 ob_start();
 include('encabezado.php');

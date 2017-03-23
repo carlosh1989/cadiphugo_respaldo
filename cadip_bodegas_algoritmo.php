@@ -9,6 +9,7 @@ use DB\Eloquent;
 use Models\BodegaComparacion;
 use Models\Clap2;
 use Models\Clap;
+use Models\ClapsBodegaComparacion;
 use Models\Familia;
 use Models\Jefe;
 new Eloquent();
@@ -19,7 +20,7 @@ $clap_viejo = Clap::all();
 $num = 1;
 foreach ($clap_viejo as $clap) 
 {
-	$clapnuevo = Clap2::where('clap_codigo', $clap->codigo_clap)->get();
+	$clapnuevo = Clap2::where('bodega_id', '>', 1)->where('clap_codigo', $clap->codigo_clap)->get();
 	$bodegas = array();
 
 	foreach($clapnuevo as $n)
@@ -49,6 +50,7 @@ foreach ($clap_viejo as $clap)
 		echo "son distintos\n";
 		$comparacionCreate = BodegaComparacion::create([
 		'clap_codigo' => $clap->codigo_clap,
+		'bodega_mayoritaria_id' => '0',
 		'comparacion' => '0',
 		]);
 	}
@@ -57,6 +59,7 @@ foreach ($clap_viejo as $clap)
 		$num2 = 0;
 		$negativo = 0;
 		$positivo = 0;
+		echo "conteo: ".count($bodegas);
 		foreach ($bodegas as $bo) 
 		{
 			if($bodega_ultima == $bo)
@@ -68,19 +71,44 @@ foreach ($clap_viejo as $clap)
 			{
 				echo "no es igual a: ".$num2."\n";
 				$negativo = $negativo + 1;
+				foreach($clapnuevo as $n)
+				{	
+					//Guardando en la tabla a integrante	
+					$clapAcreate = ClapsBodegaComparacion::create([
+						'estado_id'   	 => $n->estado_id,
+						'municipio_id'	 => $n->municipio_id,
+						'parroquia_id'	 => $n->parroquia_id,
+						'clap_codigo' 	 => $n->clap_codigo,
+						'clap_nombre' 	 => $n->clap_nombre, 
+						'bodega_id'		 => $n->bodega_id,
+						'comunidad'   	 => $n->comunidad, 
+						'cargo_id'       => $n->cargo_id,
+						'tipo'        	 => $n->tipo,
+						'cedula'      	 => $n->cedula,
+						'nombre_apellido'=> $n->nombre_apellido,
+						'telefono'       => $n->telefono,
+						'registrado'     => $n->registrado,
+						'ubicado'		 => $n->ubicado,
+						'comparacion' 	 => '',
+					]);
+				}
 			}
 			$num2 = $num2 + 1;
+
+			$positivoTotal = $positivo;
+			$negativoTotal = $negativo;
 		}
 		$comparacionCreate = BodegaComparacion::create([
 		'clap_codigo' => $clap->codigo_clap,
+		'bodega_mayoritaria_id' => $bodega_ultima,
 		'comparacion' => $positivo.":".$negativo,
 		]);
+
 
 		echo "---------------------------------------------------------------------\n";	
 		echo "RESULTADO: ".$positivo.":".$negativo."\n";
 		echo "---------------------------------------------------------------------\n";	
 	}
-
 
 	echo "------------------------------------------------------------\n";
 }

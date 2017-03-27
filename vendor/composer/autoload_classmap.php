@@ -355,6 +355,7 @@ return array(
     'Models\\Cargo' => $baseDir . '/db/models/Cargo.php',
     'Models\\Clap' => $baseDir . '/db/models/Clap.php',
     'Models\\Clap2' => $baseDir . '/db/models/Clap2.php',
+    'Models\\Clap3' => $baseDir . '/db/models/Clap3.php',
     'Models\\ClapsBodegaComparacion' => $baseDir . '/db/models/ClapsBodegaComparacion.php',
     'Models\\Familia' => $baseDir . '/db/models/Familia.php',
     'Models\\Jefe' => $baseDir . '/db/models/Jefe.php',

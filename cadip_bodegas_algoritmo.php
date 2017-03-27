@@ -21,6 +21,7 @@ $num = 1;
 foreach ($clap_viejo as $clap) 
 {
 	$clapnuevo = Clap2::where('bodega_id', '>', 1)->where('clap_codigo', $clap->codigo_clap)->get();
+	
 	$bodegas = array();
 
 	foreach($clapnuevo as $n)

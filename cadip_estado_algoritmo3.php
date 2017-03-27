@@ -8,6 +8,7 @@ $whoops->register();
 use DB\Eloquent;
 use Models\BodegaComparacion;
 use Models\Clap2;
+use Models\Clap3;
 use Models\Clap;
 use Models\Familia;
 use Models\Jefe;
@@ -60,8 +61,32 @@ foreach ($clap_viejo as $clap)
 	}
 	$comparacionCreate = BodegaComparacion::create([
 	'clap_codigo' => $clap->codigo_clap,
+	'bodega_mayoritaria_id' => $bodega_ultima,
 	'comparacion' => $positivo.":".$negativo,
 	]);
+
+	foreach($clapnuevo as $n)
+	{	
+		//Guardando en la tabla a integrante	
+		$clapAcreate = Clap3::create([
+			'estado_id'   	 => $n->estado_id,
+			'municipio_id'	 => $n->municipio_id,
+			'parroquia_id'	 => $n->parroquia_id,
+			'clap_codigo' 	 => $n->clap_codigo,
+			'clap_nombre' 	 => $n->clap_nombre, 
+			'bodega_id'		 => $n->bodega_id,
+			'comunidad'   	 => $n->comunidad, 
+			'cargo_id'       => $n->cargo_id,
+			'tipo'        	 => $n->tipo,
+			'cedula'      	 => $n->cedula,
+			'nombre_apellido'=> $n->nombre_apellido,
+			'telefono'       => $n->telefono,
+			'registrado'     => $n->registrado,
+			'ubicado'		 => $n->ubicado,
+			'positivo' 	 	 => $positivo,
+			'negativo'       => $negativo,
+		]);
+	}
 
 	echo "---------------------------------------------------------------------\n";	
 	echo "RESULTADO: ".$positivo.":".$negativo."\n";

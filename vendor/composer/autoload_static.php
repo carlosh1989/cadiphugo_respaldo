@@ -492,6 +492,7 @@ class ComposerStaticInit741d840ceac3b27d4d7bed2a2d9ca6da
         'Models\\Cargo' => __DIR__ . '/../..' . '/db/models/Cargo.php',
         'Models\\Clap' => __DIR__ . '/../..' . '/db/models/Clap.php',
         'Models\\Clap2' => __DIR__ . '/../..' . '/db/models/Clap2.php',
+        'Models\\Clap3' => __DIR__ . '/../..' . '/db/models/Clap3.php',
         'Models\\ClapsBodegaComparacion' => __DIR__ . '/../..' . '/db/models/ClapsBodegaComparacion.php',
         'Models\\Familia' => __DIR__ . '/../..' . '/db/models/Familia.php',
         'Models\\Jefe' => __DIR__ . '/../..' . '/db/models/Jefe.php',

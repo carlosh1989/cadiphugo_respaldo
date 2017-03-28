@@ -40,12 +40,12 @@ foreach ($claps as $clap)
 			$jefeUbicacion = Jefe::where('cod_municipio', $clapA->municipio_id)->where('cod_parroquia', $clapA->parroquia_id)->first();
 			$familiarUbicacion = Familia::where('cod_municipio', $clapA->municipio_id)->where('cod_parroquia', $clapA->parroquia_id)->first();
 
-			if($clapA->registrado == true)
+			if($clapA->status == true)
 			{
 				echo "\033[32m -> Registrado \033[0m";
 				if($jefeUbicacion)
 				{
-					$clapA->ubicado = 1;
+					$clapA->validado = 1;
 					$clapA->save();
 					echo "\033[32m -> Ubicado \033[0m";
 				}
@@ -53,13 +53,13 @@ foreach ($claps as $clap)
 				{
 					if($familiarUbicacion)
 					{
-						$clapA->ubicado = 1;
+						$clapA->validado = 1;
 						$clapA->save();
 						echo "\033[32m -> Ubicado \033[0m";
 					}
 					else
 					{
-						$clapA->ubicado = 0;
+						$clapA->validado = 0;
 						$clapA->save();
 						echo "\033[32m -> No Ubicado \033[0m";
 					}
@@ -67,7 +67,7 @@ foreach ($claps as $clap)
 			}
 			else
 			{
-				$clapA->ubicado = 0;
+				$clapA->validado = 0;
 				echo "\033[32m -> No Registrado \033[0m";
 				echo "\033[32m -> No Ubicado \033[0m";
 				$clapA->save();
@@ -105,8 +105,9 @@ foreach ($claps as $clap)
 				'cedula'      	 => $clap->l_com_cedula,
 				'nombre_apellido'=> $clap->nombre_comunidad,
 				'telefono'       => $clap->l_com_telefono,
-				'registrado'     => '',
-				'ubicado'		 => '',
+				'status'     	 => 0,
+				'validado'		 => 0,
+				'consolidado'    => 0,
 			]);
 
 			$clapA = Clap2::find($clapAcreate->id);
@@ -115,7 +116,7 @@ foreach ($claps as $clap)
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
-				$clapA->registrado = 1;
+				$clapA->status = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
@@ -123,13 +124,13 @@ foreach ($claps as $clap)
 				if($familiar) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
-					$clapA->registrado = 1;
+					$clapA->status = 1;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
 				{
 					echo "\033[32m No se encuentra registrado \033[0m";
-					$clapA->registrado = 0;
+					$clapA->status = 0;
 					echo "\033[32m -> no esta registrado \033[0m";
 				}
 			}
@@ -154,15 +155,15 @@ foreach ($claps as $clap)
 
 		if($clapB)
 		{
-			$jefeUbicacion = Jefe::where('cod_municipio', $clapB->municipio_id)->where('cod_parroquia', $clapB->parroquia_id)->first();
+			$jefeUbicacion = Jefe::where('cod_municipio', $clapB->municipio_id)->where('cod_parroquia', $clapB->parroquia_id)->first();			
 			$familiarUbicacion = Familia::where('cod_municipio', $clapB->municipio_id)->where('cod_parroquia', $clapB->parroquia_id)->first();
 
-			if($clapA->registrado == true)
+			if($clapB->status == true)
 			{
 				echo "\033[32m -> Registrado \033[0m";
 				if($jefeUbicacion)
 				{
-					$clapB->ubicado = 1;
+					$clapB->validado = 1;
 					$clapB->save();
 					echo "\033[32m -> Ubicado \033[0m";
 				}
@@ -170,13 +171,13 @@ foreach ($claps as $clap)
 				{
 					if($familiarUbicacion)
 					{
-						$clapB->ubicado = 1;
+						$clapB->validado = 1;
 						$clapB->save();
 						echo "\033[32m -> Ubicado \033[0m";
 					}
 					else
 					{
-						$clapB->ubicado = 0;
+						$clapB->validado = 0;
 						$clapB->save();
 						echo "\033[32m -> No Registrado \033[0m";
 						echo "\033[32m -> No Ubicado \033[0m";
@@ -185,10 +186,10 @@ foreach ($claps as $clap)
 			}
 			else
 			{
-				$clapA->ubicado = 0;
+				$clapB->validado = 0;
 				echo "\033[32m -> No Registrado \033[0m";
 				echo "\033[32m -> No Ubicado \033[0m";
-				$clapA->save();
+				$clapB->save();
 			}
 
 			if($jefe)
@@ -223,8 +224,9 @@ foreach ($claps as $clap)
 				'cedula'      	 => $clap->l_ubch_cedula,
 				'nombre_apellido'=> $clap->nombre_ubch,
 				'telefono'       => $clap->l_ubch_telefono,
-				'registrado'     => '',
-				'ubicado'		 => '',
+				'status'     	 => 0,
+				'validado'		 => 0,
+				'consolidado'    => 0,
 			]);
 
 			$clapB = Clap2::find($clapBcreate->id);
@@ -233,7 +235,7 @@ foreach ($claps as $clap)
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
-				$clapB->registrado = 1;
+				$clapB->status = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
@@ -241,13 +243,13 @@ foreach ($claps as $clap)
 				if($familiar) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
-					$clapB->registrado = 1;
+					$clapB->status = 1;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
 				{
 					echo "\033[32m No se encuentra registrado \033[0m";
-					$clapB->registrado = 0;
+					$clapB->status = 0;
 					echo "\033[32m -> no esta registrado \033[0m";
 				}
 			}
@@ -275,12 +277,12 @@ foreach ($claps as $clap)
 			$jefeUbicacion = Jefe::where('cod_municipio', $clapC->municipio_id)->where('cod_parroquia', $clapC->parroquia_id)->first();
 			$familiarUbicacion = Familia::where('cod_municipio', $clapC->municipio_id)->where('cod_parroquia', $clapC->parroquia_id)->first();
 
-			if($clapC->registrado == true)
+			if($clapC->status == true)
 			{
 				echo "\033[32m -> Registrado \033[0m";
 				if($jefeUbicacion)
 				{
-					$clapC->ubicado = 1;
+					$clapC->validado = 1;
 					$clapC->save();
 					echo "\033[32m -> Ubicado \033[0m";
 				}
@@ -288,13 +290,13 @@ foreach ($claps as $clap)
 				{
 					if($familiarUbicacion)
 					{
-						$clapC->ubicado = 1;
+						$clapC->validado = 1;
 						$clapC->save();
 						echo "\033[32m -> Ubicado \033[0m";
 					}
 					else
 					{
-						$clapC->ubicado = 0;
+						$clapC->validado = 0;
 						$clapC->save();
 						echo "\033[32m -> No Ubicado \033[0m";
 					}
@@ -302,7 +304,7 @@ foreach ($claps as $clap)
 			}
 			else
 			{
-				$clapC->ubicado = 0;
+				$clapC->validado = 0;
 				echo "\033[32m -> No Registrado \033[0m";
 				echo "\033[32m -> No Ubicado \033[0m";
 				$clapC->save();
@@ -340,8 +342,9 @@ foreach ($claps as $clap)
 				'cedula'      	 => $clap->l_unamujer_cedula,
 				'nombre_apellido'=> $clap->nombre_unamujer,
 				'telefono'       => $clap->l_unamujer_cedula_telefono,
-				'registrado'     => '',
-				'ubicado'		 => '',
+				'status'     	 => 0,
+				'validado'		 => 0,
+				'consolidado'    => 0,
 			]);
 
 			$clapC = Clap2::find($clapCcreate->id);
@@ -350,7 +353,7 @@ foreach ($claps as $clap)
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
-				$clapC->registrado = 1;
+				$clapC->status = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
@@ -358,13 +361,13 @@ foreach ($claps as $clap)
 				if($familiar) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
-					$clapC->registrado = 1;
+					$clapC->status = 1;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
 				{
 					echo "\033[32m No se encuentra registrado \033[0m";
-					$clapC->registrado = 0;
+					$clapC->status = 0;
 					echo "\033[32m -> no esta registrado \033[0m";
 				}
 			}
@@ -392,12 +395,12 @@ foreach ($claps as $clap)
 			$jefeUbicacion = Jefe::where('cod_municipio', $clapD->municipio_id)->where('cod_parroquia', $clapD->parroquia_id)->first();
 			$familiarUbicacion = Familia::where('cod_municipio', $clapD->municipio_id)->where('cod_parroquia', $clapD->parroquia_id)->first();
 
-			if($clapD->registrado == true)
+			if($clapD->status == true)
 			{
 				echo "\033[32m -> Registrado \033[0m";
 				if($jefeUbicacion)
 				{
-					$clapD->ubicado = 1;
+					$clapD->validado = 1;
 					$clapD->save();
 					echo "\033[32m -> Ubicado \033[0m";
 				}
@@ -405,13 +408,13 @@ foreach ($claps as $clap)
 				{
 					if($familiarUbicacion)
 					{
-						$clapD->ubicado = 1;
+						$clapD->validado = 1;
 						$clapD->save();
 						echo "\033[32m -> Ubicado \033[0m";
 					}
 					else
 					{
-						$clapD->ubicado = 0;
+						$clapD->validado = 0;
 						$clapD->save();
 						echo "\033[32m -> No Ubicado \033[0m";
 					}
@@ -419,7 +422,7 @@ foreach ($claps as $clap)
 			}
 			else
 			{
-				$clapD->ubicado = 0;
+				$clapD->validado = 0;
 				echo "\033[32m -> No Registrado \033[0m";
 				echo "\033[32m -> No Ubicado \033[0m";
 				$clapD->save();
@@ -457,8 +460,9 @@ foreach ($claps as $clap)
 				'cedula'      	 => $clap->l_ffm_cedula,
 				'nombre_apellido'=> $clap->nombre_ffm,
 				'telefono'       => $clap->l_ffm_telefono,
-				'registrado'     => '',
-				'ubicado'		 => '',
+				'status'     	 => 0,
+				'validado'		 => 0,
+				'consolidado'    => 0,
 			]);
 
 			$clapD = Clap2::find($clapDcreate->id);
@@ -467,7 +471,7 @@ foreach ($claps as $clap)
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
-				$clapD->registrado = 1;
+				$clapD->status = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
@@ -475,13 +479,13 @@ foreach ($claps as $clap)
 				if($familiar) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
-					$clapD->registrado = 1;
+					$clapD->status = 1;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
 				{
 					echo "\033[32m No se encuentra registrado \033[0m";
-					$clapD->registrado = 0;
+					$clapD->status = 0;
 					echo "\033[32m -> no esta registrado \033[0m";
 				}
 			}
@@ -509,12 +513,12 @@ foreach ($claps as $clap)
 			$jefeUbicacion = Jefe::where('cod_municipio', $clapE->municipio_id)->where('cod_parroquia', $clapE->parroquia_id)->first();
 			$familiarUbicacion = Familia::where('cod_municipio', $clapE->municipio_id)->where('cod_parroquia', $clapE->parroquia_id)->first();
 
-			if($clapE->registrado == true)
+			if($clapE->status == true)
 			{
 				echo "\033[32m -> Registrado \033[0m";
 				if($jefeUbicacion)
 				{
-					$clapE->ubicado = 1;
+					$clapE->validado = 1;
 					$clapE->save();
 					echo "\033[32m -> Ubicado \033[0m";
 				}
@@ -522,13 +526,13 @@ foreach ($claps as $clap)
 				{
 					if($familiarUbicacion)
 					{
-						$clapE->ubicado = 1;
+						$clapE->validado = 1;
 						$clapE->save();
 						echo "\033[32m -> Ubicado \033[0m";
 					}
 					else
 					{
-						$clapE->ubicado = 0;
+						$clapE->validado = 0;
 						$clapE->save();
 						echo "\033[32m -> No Ubicado \033[0m";
 					}
@@ -536,7 +540,7 @@ foreach ($claps as $clap)
 			}
 			else
 			{
-				$clapE->ubicado = 0;
+				$clapE->validado = 0;
 				echo "\033[32m -> No Registrado \033[0m";
 				echo "\033[32m -> No Ubicado \033[0m";
 				$clapE->save();
@@ -574,8 +578,9 @@ foreach ($claps as $clap)
 				'cedula'      	 => $clap->l_ccomunal_cedula,
 				'nombre_apellido'=> $clap->nombre_ccomunal,
 				'telefono'       => $clap->l_ccomunal_telefono,
-				'registrado'     => '',
-				'ubicado'		 => '',
+				'status'     	 => 0,
+				'validado'		 => 0,
+				'consolidado'    => 0,
 			]);
 
 			$clapE = Clap2::find($clapEcreate->id);
@@ -584,7 +589,7 @@ foreach ($claps as $clap)
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
-				$clapE->registrado = 1;
+				$clapE->status = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
@@ -592,13 +597,13 @@ foreach ($claps as $clap)
 				if($familiar) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
-					$clapE->registrado = 1;
+					$clapE->status = 1;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
 				{
 					echo "\033[32m No se encuentra registrado \033[0m";
-					$clapE->registrado = 0;
+					$clapE->status = 0;
 					echo "\033[32m -> no esta registrado \033[0m";
 				}
 			}
@@ -625,12 +630,12 @@ foreach ($claps as $clap)
 			$jefeUbicacion = Jefe::where('cod_municipio', $clapF->municipio_id)->where('cod_parroquia', $clapF->parroquia_id)->first();
 			$familiarUbicacion = Familia::where('cod_municipio', $clapF->municipio_id)->where('cod_parroquia', $clapF->parroquia_id)->first();
 
-			if($clapF->registrado == true)
+			if($clapF->status == true)
 			{
 				echo "\033[32m -> Registrado \033[0m";
 				if($jefeUbicacion)
 				{
-					$clapF->ubicado = 1;
+					$clapF->validado = 1;
 					$clapF->save();
 					echo "\033[32m -> Ubicado \033[0m";
 				}
@@ -638,13 +643,13 @@ foreach ($claps as $clap)
 				{
 					if($familiarUbicacion)
 					{
-						$clapF->ubicado = 1;
+						$clapF->validado = 1;
 						$clapF->save();
 						echo "\033[32m -> Ubicado \033[0m";
 					}
 					else
 					{
-						$clapF->ubicado = 0;
+						$clapF->validado = 0;
 						$clapF->save();
 						echo "\033[32m -> No Ubicado \033[0m";
 					}
@@ -652,7 +657,7 @@ foreach ($claps as $clap)
 			}
 			else
 			{
-				$clapF->ubicado = 0;
+				$clapF->validado = 0;
 				echo "\033[32m -> No Registrado \033[0m";
 				echo "\033[32m -> No Ubicado \033[0m";
 				$clapF->save();
@@ -690,8 +695,9 @@ foreach ($claps as $clap)
 				'cedula'      	 => $clap->l_milicia_cedula,
 				'nombre_apellido'=> $clap->nombre_milicia,
 				'telefono'       => $clap->l_milicia_telefono,
-				'registrado'     => '',
-				'ubicado'		 => '',
+				'status'     	 => 0,
+				'validado'		 => 0,
+				'consolidado'    => 0,
 			]);
 
 			$clapF = Clap2::find($clapFcreate->id);
@@ -700,7 +706,7 @@ foreach ($claps as $clap)
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
-				$clapF->registrado = 1;
+				$clapF->status = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
@@ -708,13 +714,13 @@ foreach ($claps as $clap)
 				if($familiar) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
-					$clapF->registrado = 1;
+					$clapF->status = 1;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
 				{
 					echo "\033[32m No se encuentra registrado \033[0m";
-					$clapF->registrado = 0;
+					$clapF->status = 0;
 					echo "\033[32m -> no esta registrado \033[0m";
 				}
 			}

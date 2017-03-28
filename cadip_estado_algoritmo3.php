@@ -28,7 +28,6 @@ foreach ($clap_viejo as $clap)
 	foreach($clapnuevo as $n)
 	{	
 		$bo = array($n->bodega_id);
-		var_dump($bo);	
 		$bodegas = array_merge($bodegas,$bo);
 	}
 
@@ -67,6 +66,18 @@ foreach ($clap_viejo as $clap)
 
 	foreach($clapnuevo as $n)
 	{	
+		$jefe = Jefe::where('cedula', $n->cedula)->first();
+		$familia = Familia::where('cedula', $n->cedula)->first();
+
+		if($jefe)
+		{
+			$carga = 'jefe';
+		}
+
+		if($familia)
+		{
+			$carga = 'familia';
+		}
 		//Guardando en la tabla a integrante	
 		$clapAcreate = Clap3::create([
 			'estado_id'   	 => $n->estado_id,
@@ -81,11 +92,16 @@ foreach ($clap_viejo as $clap)
 			'cedula'      	 => $n->cedula,
 			'nombre_apellido'=> $n->nombre_apellido,
 			'telefono'       => $n->telefono,
+			'carga'			 => $carga,
 			'registrado'     => $n->registrado,
 			'ubicado'		 => $n->ubicado,
 			'positivo' 	 	 => $positivo,
 			'negativo'       => $negativo,
 		]);
+
+		echo "---------------------------------------------------------------------\n";	
+		echo "RESULTADO: ".$n->bodega_id."\n";
+		echo "---------------------------------------------------------------------\n";	
 	}
 
 	echo "---------------------------------------------------------------------\n";	
@@ -94,7 +110,6 @@ foreach ($clap_viejo as $clap)
 
 	echo "\n";
 	echo "conteo: ".count($bodegas)."\n";
-	var_dump($bodegas);
 	echo "\n";	
 }
 

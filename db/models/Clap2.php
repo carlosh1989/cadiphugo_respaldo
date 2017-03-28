@@ -5,6 +5,6 @@ use \Illuminate\Database\Eloquent\Model;
 class Clap2 extends Model {
 	public $timestamps = false;
     protected $table = 'claps';
-    protected $fillable = ['estado_id','municipio_id','parroquia_id','clap_codigo','clap_nombre','comunidad','cargo_id','tipo','cedula','nombre_apellido','telefono','status','validado','consolidado'];
+    protected $fillable = ['estado_id','municipio_id','parroquia_id','clap_codigo','clap_nombre','comunidad','cargo_id','tipo','cedula','nombre_apellido','telefono','tipo_f','status','validado','consolidado'];
     //Ejemplo de definir campos
 }

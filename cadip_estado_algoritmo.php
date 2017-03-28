@@ -30,8 +30,8 @@ foreach ($claps as $clap)
 		echo "LIDER COMUNIDAD: ".$clap->nombre_comunidad."";
 
 		//buscando a integrante en tabla de jefes de familia
-		$jefe = Jefe::where('cedula',$clap->l_com_cedula)->first();
-		$familiar = Familia::where('cedula',$clap->l_com_cedula)->first();
+		$jefe1 = Jefe::where('cedula',$clap->l_com_cedula)->first();
+		$familiar1 = Familia::where('cedula',$clap->l_com_cedula)->first();
 
 		$clapA = Clap2::where('cedula', $clap->l_com_cedula)->first();
 
@@ -73,17 +73,17 @@ foreach ($claps as $clap)
 				$clapA->save();
 			}
 
-			if($jefe)
+			if($jefe1)
 			{
-				$clapA->bodega_id = $jefe->bodega;
+				$clapA->bodega_id = $jefe1->bodega;
 				$clapA->save();
 				echo "\033[32m -> Bodega: ".$clapA->bodega_id." \033[0m";
 			}
 			else
 			{
-				if($familiar)
+				if($familiar1)
 				{
-					$clapA->bodega_id = $familiar->bodega;
+					$clapA->bodega_id = $familiar1->bodega;
 					$clapA->save();
 					echo "\033[32m -> Bodega: ".$clapA->bodega_id." \033[0m";
 				}
@@ -105,6 +105,7 @@ foreach ($claps as $clap)
 				'cedula'      	 => $clap->l_com_cedula,
 				'nombre_apellido'=> $clap->nombre_comunidad,
 				'telefono'       => $clap->l_com_telefono,
+				'tipo_f'		=> 0,
 				'status'     	 => 0,
 				'validado'		 => 0,
 				'consolidado'    => 0,
@@ -112,25 +113,28 @@ foreach ($claps as $clap)
 
 			$clapA = Clap2::find($clapAcreate->id);
 			//verificando si lo encontro tanto como jefe o como carga familiar
-			if($jefe) 
+			if($jefe1) 
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
 				$clapA->status = 1;
+				$clapA->tipo_f = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
 			{
-				if($familiar) 
+				if($familiar1) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
 					$clapA->status = 1;
+					$clapA->tipo_f = 2;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
 				{
 					echo "\033[32m No se encuentra registrado \033[0m";
 					$clapA->status = 0;
+					$clapA->tipo_f = 0;
 					echo "\033[32m -> no esta registrado \033[0m";
 				}
 			}
@@ -148,8 +152,8 @@ foreach ($claps as $clap)
 	{
 		echo "UBCH: ".$clap->nombre_ubch."";
 		//buscando a integrante en tabla de jefes de familia
-		$jefe = Jefe::where('cedula',$clap->l_ubch_cedula)->first();
-		$familiar = Familia::where('cedula',$clap->l_ubch_cedula)->first();
+		$jefe2 = Jefe::where('cedula',$clap->l_ubch_cedula)->first();
+		$familiar2 = Familia::where('cedula',$clap->l_ubch_cedula)->first();
 
 		$clapB = Clap2::where('cedula', $clap->l_ubch_cedula)->first();
 
@@ -192,17 +196,17 @@ foreach ($claps as $clap)
 				$clapB->save();
 			}
 
-			if($jefe)
+			if($jefe2)
 			{
-				$clapB->bodega_id = $jefe->bodega;
+				$clapB->bodega_id = $jefe2->bodega;
 				$clapB->save();
 				echo "\033[32m -> Bodega: ".$clapB->bodega_id." \033[0m";
 			}
 			else
 			{
-				if($familiar)
+				if($familiar2)
 				{
-					$clapB->bodega_id = $familiar->bodega;
+					$clapB->bodega_id = $familiar2->bodega;
 					$clapB->save();
 					echo "\033[32m -> Bodega: ".$clapB->bodega_id." \033[0m";
 				}
@@ -231,19 +235,21 @@ foreach ($claps as $clap)
 
 			$clapB = Clap2::find($clapBcreate->id);
 			//verificando si lo encontro tanto como jefe o como carga familiar
-			if($jefe) 
+			if($jefe2) 
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
 				$clapB->status = 1;
+				$clapB->tipo_f = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
 			{
-				if($familiar) 
+				if($familiar2) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
 					$clapB->status = 1;
+					$clapB->tipo_f = 2;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
@@ -267,8 +273,8 @@ foreach ($claps as $clap)
 	{
 		echo "UNA MUJER: ".$clap->nombre_unamujer."";
 		//buscando a integrante en tabla de jefes de familia
-		$jefe = Jefe::where('cedula',$clap->l_unamujer_cedula)->first();
-		$familiar = Familia::where('cedula',$clap->l_unamujer_cedula)->first();
+		$jefe3 = Jefe::where('cedula',$clap->l_unamujer_cedula)->first();
+		$familiar3 = Familia::where('cedula',$clap->l_unamujer_cedula)->first();
 
 		$clapC = Clap2::where('cedula', $clap->l_unamujer_cedula)->first();
 
@@ -310,17 +316,17 @@ foreach ($claps as $clap)
 				$clapC->save();
 			}
 
-			if($jefe)
+			if($jefe3)
 			{
-				$clapC->bodega_id = $jefe->bodega;
+				$clapC->bodega_id = $jefe3->bodega;
 				$clapC->save();
 				echo "\033[32m -> Bodega: ".$clapC->bodega_id." \033[0m";
 			}
 			else
 			{
-				if($familiar)
+				if($familiar3)
 				{
-					$clapC->bodega_id = $familiar->bodega;
+					$clapC->bodega_id = $familiar3->bodega;
 					$clapC->save();
 					echo "\033[32m -> Bodega: ".$clapC->bodega_id." \033[0m";
 				}
@@ -349,19 +355,21 @@ foreach ($claps as $clap)
 
 			$clapC = Clap2::find($clapCcreate->id);
 			//verificando si lo encontro tanto como jefe o como carga familiar
-			if($jefe) 
+			if($jefe3) 
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
 				$clapC->status = 1;
+				$clapC->tipo_f = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
 			{
-				if($familiar) 
+				if($familiar3) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
 					$clapC->status = 1;
+					$clapC->tipo_f = 2;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
@@ -385,8 +393,8 @@ foreach ($claps as $clap)
 	{
 		echo "LIDER FFM: ".$clap->nombre_ffm."";
 		//buscando a integrante en tabla de jefes de familia
-		$jefe = Jefe::where('cedula',$clap->l_ffm_cedula)->first();
-		$familiar = Familia::where('cedula',$clap->l_ffm_cedula)->first();
+		$jefe4 = Jefe::where('cedula',$clap->l_ffm_cedula)->first();
+		$familiar4 = Familia::where('cedula',$clap->l_ffm_cedula)->first();
 
 		$clapD = Clap2::where('cedula', $clap->l_ffm_cedula)->first();
 
@@ -428,17 +436,17 @@ foreach ($claps as $clap)
 				$clapD->save();
 			}
 
-			if($jefe)
+			if($jefe4)
 			{
-				$clapD->bodega_id = $jefe->bodega;
+				$clapD->bodega_id = $jefe4->bodega;
 				$clapD->save();
 				echo "\033[32m -> Bodega: ".$clapD->bodega_id." \033[0m";
 			}
 			else
 			{
-				if($familiar)
+				if($familiar4)
 				{
-					$clapD->bodega_id = $familiar->bodega;
+					$clapD->bodega_id = $familiar4->bodega;
 					$clapD->save();
 					echo "\033[32m -> Bodega: ".$clapD->bodega_id." \033[0m";
 				}
@@ -467,19 +475,21 @@ foreach ($claps as $clap)
 
 			$clapD = Clap2::find($clapDcreate->id);
 			//verificando si lo encontro tanto como jefe o como carga familiar
-			if($jefe) 
+			if($jefe4) 
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
 				$clapD->status = 1;
+				$clapD->tipo_f = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
 			{
-				if($familiar) 
+				if($familiar4) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
 					$clapD->status = 1;
+					$clapD->tipo_f = 2;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
@@ -503,8 +513,8 @@ foreach ($claps as $clap)
 	{
 		echo "LIDER CONSEJO COMUNAL: ".$clap->nombre_ccomunal."";
 		//buscando a integrante en tabla de jefes de familia
-		$jefe = Jefe::where('cedula',$clap->l_ccomunal_cedula)->first();
-		$familiar = Familia::where('cedula',$clap->l_ccomunal_cedula)->first();
+		$jefe5 = Jefe::where('cedula',$clap->l_ccomunal_cedula)->first();
+		$familiar5 = Familia::where('cedula',$clap->l_ccomunal_cedula)->first();
 
 		$clapE = Clap2::where('cedula', $clap->l_ccomunal_cedula)->first();
 
@@ -546,17 +556,17 @@ foreach ($claps as $clap)
 				$clapE->save();
 			}
 
-			if($jefe)
+			if($jefe5)
 			{
-				$clapE->bodega_id = $jefe->bodega;
+				$clapE->bodega_id = $jefe5->bodega;
 				$clapE->save();
 				echo "\033[32m -> Bodega: ".$clapE->bodega_id." \033[0m";
 			}
 			else
 			{
-				if($familiar)
+				if($familiar5)
 				{
-					$clapE->bodega_id = $familiar->bodega;
+					$clapE->bodega_id = $familiar5->bodega;
 					$clapE->save();
 					echo "\033[32m -> Bodega: ".$clapE->bodega_id." \033[0m";
 				}
@@ -585,19 +595,21 @@ foreach ($claps as $clap)
 
 			$clapE = Clap2::find($clapEcreate->id);
 			//verificando si lo encontro tanto como jefe o como carga familiar
-			if($jefe) 
+			if($jefe5) 
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
 				$clapE->status = 1;
+				$clapE->tipo_f = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
 			{
-				if($familiar) 
+				if($familiar5) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
 					$clapE->status = 1;
+					$clapE->tipo_f = 2;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else
@@ -620,8 +632,8 @@ foreach ($claps as $clap)
 	{
 		echo "MILICIA: ".$clap->nombre_milicia."";
 		//buscando a integrante en tabla de jefes de familia
-		$jefe = Jefe::where('cedula',$clap->l_ccomunal_cedula)->first();
-		$familiar = Familia::where('cedula',$clap->l_ccomunal_cedula)->first();
+		$jefe6 = Jefe::where('cedula',$clap->l_milicia_cedula)->first();
+		$familiar6 = Familia::where('cedula',$clap->l_milicia_cedula)->first();
 
 		$clapF = Clap2::where('cedula', $clap->l_milicia_cedula)->first();
 
@@ -663,17 +675,17 @@ foreach ($claps as $clap)
 				$clapF->save();
 			}
 
-			if($jefe)
+			if($jefe6)
 			{
-				$clapF->bodega_id = $jefe->bodega;
+				$clapF->bodega_id = $jefe6->bodega;
 				$clapF->save();
 				echo "\033[32m -> Bodega: ".$clapF->bodega_id." \033[0m";
 			}
 			else
 			{
-				if($familiar)
+				if($familiar6)
 				{
-					$clapF->bodega_id = $familiar->bodega;
+					$clapF->bodega_id = $familiar6->bodega;
 					$clapF->save();
 					echo "\033[32m -> Bodega: ".$clapF->bodega_id." \033[0m";
 				}
@@ -702,19 +714,21 @@ foreach ($claps as $clap)
 
 			$clapF = Clap2::find($clapFcreate->id);
 			//verificando si lo encontro tanto como jefe o como carga familiar
-			if($jefe) 
+			if($jefe6) 
 			{
 				echo "\033[32m es jefe de familia \033[0m";
 				//actualizando el estatus de esa integrante
 				$clapF->status = 1;
+				$clapF->tipo_f = 1;
 				echo "\033[32m -> esta registrado \033[0m";
 			}
 			else
 			{
-				if($familiar) 
+				if($familiar6) 
 				{
 					echo "\033[32m es carga familiar \033[0m";
 					$clapF->status = 1;
+						$clapF->tipo_f = 2;
 					echo "\033[32m -> esta registrado \033[0m";
 				}
 				else

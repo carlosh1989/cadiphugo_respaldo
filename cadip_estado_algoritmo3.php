@@ -12,7 +12,7 @@ use Models\Clap;
 use Models\Familia;
 use Models\Jefe;
 new Eloquent();
-//buscando todos los claps de la tabla vieja
+//buscando todos los claps de la tabla viejaa
 $clap_viejo = Clap::all();
 $num = 1;
 foreach ($clap_viejo as $clap) 

@@ -95,6 +95,38 @@ $(document).ready(function(){
 });
 </script>
 
+<script language="javascript">
+$(document).ready(function(){
+   $("#municipioD").change(function () {
+           $("#municipioD option:selected").each(function () {
+            idmunicipio = $(this).val();
+            $.post("parroquias.php", { idmunicipio:idmunicipio }, function(data){
+                $("#parroquiaD").html(data);
+            }); 
+            window.console&&console.log(idmunicipio);           
+        });
+   })
+
+});
+</script>
+
+<script language="javascript">
+$(document).ready(function(){
+   $("#parroquiaD").change(function () {
+           $("#parroquiaD option:selected").each(function () {
+            idparroquia = $(this).val();
+            $.post("bodegas.php", { idparroquia:idparroquia }, function(data){
+                $("#bodegaD").html(data);
+            }); 
+            window.console&&console.log(idparroquia);           
+        });
+   })
+
+});
+</script>
+
+
+
 
 <?php
 //SECCIÓN DE CARGA DE LIBRERIAS Y MODELOS
@@ -179,7 +211,7 @@ new Eloquent();
 								<div class="row">
 									<div class="col-lg-12 col-sm-12 col-xs-12">
 										<div class="well with-header">
-											<div class="header bordered-green"><li class="fa fa-users fa-2x red-text"></li> Busqueda Jede de familia y la carga familiar</div>
+											<div class="header bordered-green"><li class="fa fa-users fa-2x red-text"></li> Busqueda Jefe de familia y la carga familiar</div>
 										<form action="jefecarga_preview.php" method="POST">
 											
 												<?php $municipios = Municipio::all(); ?>
@@ -245,6 +277,47 @@ new Eloquent();
                                             </div>
                                         </div>
                                     </div>
+                                    </form>
+
+
+
+
+
+                                               <div id="profile3" class="tab-pane">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                                        <div class="well with-header">
+                                            <div class="header bordered-green"><li class="fa fa-users fa-2x red-text"></li> Busqueda Jefe de familia con huellas certificadas y la carga familiar</div>
+                                        <form action="jefehuella_preview.php" method="POST">
+                                            
+                                                <?php $municipios = Municipio::all(); ?>
+                                                <select name="municipio" id="municipioD">
+                                                <?php foreach ($municipios as $municipio): ?>
+                                                     <option value="<?php echo $municipio->id_municipio ?>"><?php echo $municipio->nombre_municipio ?></option>
+                                                <?php endforeach ?>
+                                                </select>
+                                    
+                                
+                                                <select name="parroquia" id="parroquiaD">
+                                                </select>
+                                
+                                    
+                                                <select name="bodega" id="bodegaD">
+                                                </select>
+                                        
+                                        
+                                        <hr>
+                                            <div class="col-lg-2 col-sm-12 col-xs-12">
+                                                <button class="btn btn-danger btn-lg" type="submit" value="buscar">
+                                                Buscar  <i class="fa fa-search"></i> 
+                                                </button>
+                                            </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                </div>
+                                            </div>
+
                                     <div class="horizontal-space"></div>
                                 </div>
                 <!-- /Page Body -->

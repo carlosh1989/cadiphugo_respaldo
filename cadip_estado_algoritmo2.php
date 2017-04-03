@@ -6,122 +6,186 @@ $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
 use DB\Eloquent;
-use Models\BodegaComparacion;
 use Models\Clap2;
 use Models\Clap;
 use Models\Familia;
 use Models\Jefe;
 new Eloquent();
 
-//buscando todos los claps de la tabla vieja
-$clap_viejo = Clap::all();
+$claps = Clap2::all();
+$clapConteo = Clap2::count();
+$num = 0;
+$num2 = 0;
 
-foreach ($clap_viejo as $clap) 
+$counter = 0;
+$total = $clapConteo;
+
+foreach ($claps as $c) 
 {
-	//buscando con el codigo de clap en la tabla nuevo los integrantes
-	$clap_nuevo = Clap2::where('clap_codigo', $clap->codigo_clap)->get();
-	
-/*	foreach ($clap_nuevo as $clap2) 
+	if($c->status == true)
 	{
-		echo "\n";
-		echo "---------------------------------------------------------------------\n";
-		echo "\033[32m NOMBRE INTEGRANTE \033[0m: -> ".$clap2->nombre_apellido." \n";
-		echo "CEDULA: ".$clap2->cedula."\n";
-		echo "CARGO: ".$clap2->cargo_id."\n";
-	}*/
+		//si es jefe de familia
+		if($c->tipo_f == 1)
+		{
+			$jefe_ubicacion = Jefe::where('cod_municipio',$c->municipio_id)->where('cod_parroquia',$c->parroquia_id)->where('cedula',$c->cedula)->first();
+			
+			//validando m y parroquia de forma global
+			if($jefe_ubicacion)
+			{
+				echo "\n";
+				echo "---------------------------------------------------------------------\n";
+				echo "\033[32m SI GLOBAL: \033[0m: -> ".$c->cedula." \n";
+				//comenzar a buscar por miembro de clap uno por uno
+				echo "---------------------------------------------------------------------\n";
+				$c->validado = 1;
+				$c->validado_m = 1;
+				$c->validado_p = 1;
+				$c->save();
+			}
+			else
+			{
+				echo "\n";
+				echo "---------------------------------------------------------------------\n";
+				echo "\033[32m NO GLOBAL: \033[0m: -> ".$c->cedula." \n";
+				//comenzar a buscar por miembro de clap uno por uno
+				echo "---------------------------------------------------------------------\n";
+				$c->validado = 0;
+				$c->save();
 
-	//VERIFICANDO SI HAY INTEGRANTE DE MILICIA
-	echo "---------------------------------------------------------------------\n";	
+				//validando municipio
+				$jefe_validado_m = Jefe::where('cod_municipio',$c->municipio_id)->where('cedula',$c->cedula)->first();
+				
+				if($jefe_validado_m)
+				{
+					echo "\n";
+					echo "---------------------------------------------------------------------\n";
+					echo "\033[32m SI MUNICIPIO: \033[0m: -> ".$c->cedula." \n";
+					//comenzar a buscar por miembro de clap uno por uno
+					echo "---------------------------------------------------------------------\n";
+					$c->validado_m = 1;
+					$c->save();
+				}
+				else
+				{
+					echo "\n";
+					echo "---------------------------------------------------------------------\n";
+					echo "\033[32m NO MUNICIPIO: \033[0m: -> ".$c->cedula." \n";
+					//comenzar a buscar por miembro de clap uno por uno
+					echo "---------------------------------------------------------------------\n";
+					$c->validado_m = 0;
+					$c->save();
+				}
 
-	$bodegas = array($clap_nuevo[0]->bodega_id, $clap_nuevo[1]->bodega_id, $clap_nuevo[2]->bodega_id, $clap_nuevo[3]->bodega_id,$clap_nuevo[4]->bodega_id);
-	//$arr2 = array("1971", "1971", "101", "1971","1971","056165165");
-	usort($bodegas, "strcmp");
-	$bodega_ultima = array_pop($bodegas);
+				//validando parroquia
+				$jefe_validado_p = Jefe::where('cod_parroquia',$c->parroquia_id)->where('cedula',$c->cedula)->first();
+				
+				if($jefe_validado_p)
+				{
+					echo "\n";
+					echo "---------------------------------------------------------------------\n";
+					echo "\033[32m SI PARROQUIA: \033[0m: -> ".$c->cedula." \n";
+					//comenzar a buscar por miembro de clap uno por uno
+					echo "---------------------------------------------------------------------\n";
+					$c->validado_p = 1;
+					$c->save();
+				}
+				else
+				{
+					echo "\n";
+					echo "---------------------------------------------------------------------\n";
+					echo "\033[32m NO PARROQUIA: \033[0m: -> ".$c->cedula." \n";
+					//comenzar a buscar por miembro de clap uno por uno
+					echo "---------------------------------------------------------------------\n";
+					$c->validado_p = 0;
+					$c->save();
+				}
+			}
+		}
 
-	$BodegaComparacion = BodegaComparacion::find($clap->codigo_clap);
+		if($c->tipo_f == 2)
+		{
+			$familia_ubicacion = Familia::where('cod_municipio',$c->municipio_id)->where('cod_parroquia',$c->parroquia_id)->where('cedula',$c->cedula)->first();
+			
+			//validando m y parroquia de forma global
+			if($familia_ubicacion)
+			{
+				echo "\n";
+				echo "---------------------------------------------------------------------\n";
+				echo "\033[32m SI GLOBAL: \033[0m: -> ".$c->cedula." \n";
+				//comenzar a buscar por miembro de clap uno por uno
+				echo "---------------------------------------------------------------------\n";
+				$c->validado = 1;
+				$c->validado_m = 1;
+				$c->validado_p = 1;
+				$c->save();
+			}
+			else
+			{
+				echo "\n";
+				echo "---------------------------------------------------------------------\n";
+				echo "\033[32m NO GLOBAL: \033[0m: -> ".$c->cedula." \n";
+				//comenzar a buscar por miembro de clap uno por uno
+				echo "---------------------------------------------------------------------\n";
+				$c->validado = 0;
+				$c->save();
 
-	if($BodegaComparacion)
-	{
-		echo "---------------------------------------------------------------------\n";	
-		echo "YA SE HIZO COMPARACION DE BODEGAS EN ESTE CLAP\n";
-		echo "---------------------------------------------------------------------\n";	
+				//validando municipio
+				$familia_validado_m = Jefe::where('cod_municipio',$c->municipio_id)->where('cedula',$c->cedula)->first();
+				
+				if($familia_validado_m)
+				{
+					echo "\n";
+					echo "---------------------------------------------------------------------\n";
+					echo "\033[32m SI MUNICIPIO: \033[0m: -> ".$c->cedula." \n";
+					//comenzar a buscar por miembro de clap uno por uno
+					echo "---------------------------------------------------------------------\n";
+					$c->validado_m = 1;
+					$c->save();
+				}
+				else
+				{
+					echo "\n";
+					echo "---------------------------------------------------------------------\n";
+					echo "\033[32m NO MUNICIPIO: \033[0m: -> ".$c->cedula." \n";
+					//comenzar a buscar por miembro de clap uno por uno
+					echo "---------------------------------------------------------------------\n";
+					$c->validado_m = 0;
+					$c->save();
+				}
+
+				//validando parroquia
+				$familia_validado_p = Jefe::where('cod_parroquia',$c->parroquia_id)->where('cedula',$c->cedula)->first();
+				
+				if($familia_validado_p)
+				{
+					echo "\n";
+					echo "---------------------------------------------------------------------\n";
+					echo "\033[32m SI PARROQUIA: \033[0m: -> ".$c->cedula." \n";
+					//comenzar a buscar por miembro de clap uno por uno
+					echo "---------------------------------------------------------------------\n";
+					$c->validado_p = 1;
+					$c->save();
+				}
+				else
+				{
+					echo "\n";
+					echo "---------------------------------------------------------------------\n";
+					echo "\033[32m NO PARROQUIA: \033[0m: -> ".$c->cedula." \n";
+					//comenzar a buscar por miembro de clap uno por uno
+					echo "---------------------------------------------------------------------\n";
+					$c->validado_p = 0;
+					$c->save();
+				}
+			}
+		}
 	}
-	else
-	{
-		if($bodega_ultima == $bodegas[0])
-		{
-			echo "6:0\n";
-			$comparacionCreate = BodegaComparacion::create([
-			'clap_codigo' => $clap_nuevo[5]->clap_codigo,
-			'comparacion' => '6:0',
-			]);
-		}
-
-		if($bodega_ultima == $bodegas[1])
-		{
-			echo "5:1\n";
-			$comparacionCreate = BodegaComparacion::create([
-			'clap_codigo' => $clap_nuevo[5]->clap_codigo,
-			'comparacion' => '5:1',
-			]);
-		}
-
-		if($bodega_ultima == $bodegas[2])
-		{
-			echo "4:2\n";
-			$comparacionCreate = BodegaComparacion::create([
-			'clap_codigo' => $clap_nuevo[5]->clap_codigo,
-			'comparacion' => '4:2',
-			]);
-		}
-
-		if($bodega_ultima == $bodegas[3])
-		{
-			echo "3:3\n";
-			$comparacionCreate = BodegaComparacion::create([
-			'clap_codigo' => $clap_nuevo[5]->clap_codigo,
-			'comparacion' => '3:3',
-			]);
-		}
-
-		if($bodega_ultima == $bodegas[4])
-		{
-			echo "2:4\n";
-			$comparacionCreate = BodegaComparacion::create([
-			'clap_codigo' => $clap_nuevo[5]->clap_codigo,
-			'comparacion' => '2:4',
-			]);
-		}
-
-		if($bodega_ultima == $bodegas[5])
-		{
-			echo "1:5\n";
-			$comparacionCreate = BodegaComparacion::create([
-			'clap_codigo' => $clap_nuevo[5]->clap_codigo,
-			'comparacion' => '1:5',
-			]);
-		}
-
-		if($bodega_ultima == $bodegas[6])
-		{
-			echo "0:6\n";
-			$comparacionCreate = BodegaComparacion::create([
-			'clap_codigo' => $clap_nuevo[5]->clap_codigo,
-			'comparacion' => '0:6',
-			]);
-		}
-	}
-
-
-
-	echo "---------------------------------------------------------------------\n";	
-	var_dump($bodegas);
-	echo "---------------------------------------------------------------------\n";	
+	echo "---------------------------------------------------------------------\n";
+  	$counter++;
+    $percentage = $counter/$total;
+	$percentage = floor(round( (($counter / $clapConteo) * 100), 1 ));
+    echo "Progreso: ".$percentage."% \n";
+	echo "---------------------------------------------------------------------\n";
 	echo "\n";
-}
-
-
-
-
+}	
 
 

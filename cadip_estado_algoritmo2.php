@@ -128,7 +128,7 @@ foreach ($claps as $c)
 				echo "---------------------------------------------------------------------\n";
 				$c->validado = 0;
 				$c->save();
-
+ 
 				//validando municipio
 				$familia_validado_m = Jefe::where('cod_municipio',$c->municipio_id)->where('cedula',$c->cedula)->first();
 				

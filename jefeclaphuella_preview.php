@@ -27,7 +27,7 @@ $jefes = Jefe::where('n_personas', '>', 1)->where('cod_municipio',$municipio)->w
                                 <h5 class="row-title before-darkorange"><i class="fa fa-list-alt darkorange"></i>Busquedas segun municipio, parroquia y bodega</h5>
                             </div>
                             <div class="col-lg-12 col-sm-12 col-xs-12">
-                            <a class="btn btn-danger btn-lg pull-right" href="jefehuella_pdf.php?municipio=<?php echo $municipio ?>&parroquia=<?php echo $parroquia ?>&bodega=<?php echo $bodega ?>"><i class="fa fa-download" aria-hidden="true"></i> Descargar PDF</a>
+                            <a class="btn btn-danger btn-lg pull-right" href="jefeclaphuella_pdf.php?municipio=<?php echo $municipio ?>&parroquia=<?php echo $parroquia ?>&bodega=<?php echo $bodega ?>"><i class="fa fa-download" aria-hidden="true"></i> Descargar PDF</a>
                             <hr>
                             <h3 align="center">Jefes de familia</h3>
                             <?php
@@ -111,7 +111,6 @@ $jefes = Jefe::where('n_personas', '>', 1)->where('cod_municipio',$municipio)->w
                             </div>
                         </div>
                     </div>
-
                     </div>
 
     <!--Basic Scripts-->

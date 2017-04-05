@@ -125,6 +125,36 @@ $(document).ready(function(){
 });
 </script>
 
+<script language="javascript">
+$(document).ready(function(){
+   $("#municipioE").change(function () {
+           $("#municipioE option:selected").each(function () {
+            idmunicipio = $(this).val();
+            $.post("parroquias.php", { idmunicipio:idmunicipio }, function(data){
+                $("#parroquiaE").html(data);
+            }); 
+            window.console&&console.log(idmunicipio);           
+        });
+   })
+
+});
+</script>
+
+<script language="javascript">
+$(document).ready(function(){
+   $("#parroquiaE").change(function () {
+           $("#parroquiaE option:selected").each(function () {
+            idparroquia = $(this).val();
+            $.post("bodegas.php", { idparroquia:idparroquia }, function(data){
+                $("#bodegaE").html(data);
+            }); 
+            window.console&&console.log(idparroquia);           
+        });
+   })
+
+});
+</script>
+
 
 
 
@@ -316,6 +346,44 @@ new Eloquent();
                                             </form>
                                         </div>
                                 </div>
+
+
+
+                                               <div id="profile3" class="tab-pane">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                                        <div class="well with-header">
+                                            <div class="header bordered-green"><li class="fa fa-users fa-2x red-text"></li> Busqueda CLAP Jefe de familia con huellas certificadas y la carga familiar</div>
+                                        <form action="jefeclaphuella_preview.php" method="POST">
+                                            
+                                                <?php $municipios = Municipio::all(); ?>
+                                                <select name="municipio" id="municipioE">
+                                                <?php foreach ($municipios as $municipio): ?>
+                                                     <option value="<?php echo $municipio->id_municipio ?>"><?php echo $municipio->nombre_municipio ?></option>
+                                                <?php endforeach ?>
+                                                </select>
+                                    
+                                
+                                                <select name="parroquia" id="parroquiaE">
+                                                </select>
+                                
+                                    
+                                                <select name="bodega" id="bodegaE">
+                                                </select>
+                                        
+                                        
+                                        <hr>
+                                            <div class="col-lg-2 col-sm-12 col-xs-12">
+                                                <button class="btn btn-danger btn-lg" type="submit" value="buscar">
+                                                Buscar  <i class="fa fa-search"></i> 
+                                                </button>
+                                            </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                </div>
+                                
+
                                             </div>
 
                                     <div class="horizontal-space"></div>

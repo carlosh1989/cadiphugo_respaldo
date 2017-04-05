@@ -1,0 +1,325 @@
+----------------------------
+bodega = 1139
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+
+----------------------------
+bodega = 
+responsable =
+
+jefe de familia
+certificados = 
+no certificados = 
+
+carga familiar
+certificados = 
+no certificados =
+----------------------------
+

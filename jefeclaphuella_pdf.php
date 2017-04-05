@@ -35,7 +35,7 @@ $jefe = Jefe::where('bodega', $bodega)->first();
 
 $NombreArchivo = $jefe->bodeguera->direccion.'_'.$jefe->bodeguera->responsable;
 //\krumo::dump($solos);
-include("jefehuella.php");
+include("jefeclaphuella.php");
 $stylesheet = file_get_contents('style.css');
 $mpdf->WriteHTML($stylesheet,1);
 $mpdf->WriteHTML(ob_get_clean(),2);

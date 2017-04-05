@@ -10,9 +10,10 @@ extract($_POST);
 
 $jefes = Jefe::where('n_personas', '>', 1)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega)->orderBy('cedula', 'asc')->get();
 
-$solos = Jefe::where('n_personas',1)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega)->orderBy('cedula', 'desc')->get();
+$solos = Jefe::where('n_personas',1)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega)->where('name', 'NOT LIKE', "%%")->get();->orderBy('cedula', 'desc')->get();
 
 $jefe = Jefe::where('bodega', $bodega)->first();
+
 //\krumo::dump($solos);
 ?>
 <br>
@@ -128,7 +129,7 @@ Dirección: <?php echo $jefe->bodeguera->direccion ?>
 		<?php endforeach ?>
     </tbody>
   </table>
-<hr>
+
 <?php 
 $total_familias = $jefes->count() + $solos->count();
 $total_personas = $jefes->sum('n_personas') + $solos->count();
@@ -140,11 +141,21 @@ $total_personas = $jefes->sum('n_personas') + $solos->count();
 $jefes_certificados = Jefe::where('n_personas', '>', 1)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega)->orderBy('cedula', 'asc')->where('huella_certificada',1)->get();
 
 $solos_certificados = Jefe::where('n_personas',1)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega)->orderBy('cedula', 'desc')->where('huella_certificada',1)->get();
+
+$jefes_no_certificados = Jefe::where('n_personas', '>', 1)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega)->orderBy('cedula', 'asc')->where('huella_certificada',0)->get();
+
+$solos_no_certificados = Jefe::where('n_personas',1)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega)->orderBy('cedula', 'desc')->where('huella_certificada',0)->get();
 ?>
-<pre>Número de Familias: <?php echo $total_familias ?></pre>
-<pre>Jefes de familia certificados: <?php echo $jefes_certificados->count(); ?></pre>
+<b>Número de Familias:</b> <?php echo $jefes->count() ?> 
+<br>
+<b>Número de Personas solas:</b> <?php echo $solos->count() ?>
+<br>
+<b>Número de Personas:</b> <?php echo $total_personas ?>
 <hr>
-<pre>Número de Personas solas: <?php echo $solos->count() ?></pre>
-<pre>Personas solas certificadas: <?php echo $solos_certificados->count() ?></pre>
+<br>
+<b>Jefes de familia certificados:</b> <?php echo $jefes_certificados->count() + $solos_certificados->count(); ?>
+<br>
+<b>Personas solas certificadas:</b> <?php echo $solos_certificados->count() ?>
 <hr>
-<pre>Número de Personas: <?php echo $total_personas ?></pre>
+<b>Jefes de familia no certificados:</b> <?php echo $jefes_no_certificados->count() + $solos_no_certificados->count(); ?>
+

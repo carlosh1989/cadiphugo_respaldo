@@ -4,9 +4,9 @@ use Models\Bodega;
 use Models\Familia;
 use \Illuminate\Database\Eloquent\Model;
  
-class JefeHuella extends Model {
+class JefeCertificados extends Model {
 	public $timestamps = false;
-    protected $table = 'tabla_poblacion_cert';
+    protected $table = 'registro_estudio_datos_del_encuestado';
 	protected $primaryKey = 'id';
     //Ejemplo de definir campos
 

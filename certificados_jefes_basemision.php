@@ -6,6 +6,7 @@ $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
 use DB\Eloquent;
+use Models\BaseMisiones;
 use Models\Bodega;
 use Models\BodegaComparacion;
 use Models\Clap2;
@@ -26,7 +27,7 @@ $jefeSI = Jefe::where('base_misiones',$basemisiones)->where('cod_municipio',$mun
 $bodega = Bodega::where('id',$bodega_id)->first();
 $municipio = Municipio::where('id_municipio',$bodega->cod_municipio)->first();
 $parroquia = Parroquia::where('id_parrouia',$bodega->cod_parroquia)->first();
-
+$datosBASEMISIONES = BaseMisiones::where('id', $basemisiones)->first();
 $responsable = $bodega->responsable;
 $jefeSiExcel = array();
 
@@ -65,11 +66,11 @@ foreach ($jefeSI as $key => $jefe)
 
 if($tipo == 1)
 {
-	header("Content-Disposition: attachment; filename=\"certificados_base_mision_".$basemisiones.".xls\"");
+	header("Content-Disposition: attachment; filename=\"certificados_jefes_familia_base_mision_".$datosBASEMISIONES->nombre_base."_".$bodega->responsable.".xls\"");
 }
 elseif($tipo == 0) 
 {
-	header("Content-Disposition: attachment; filename=\"no_certificados_base_mision_".$basemisiones.".xls\"");
+	header("Content-Disposition: attachment; filename=\"no_certificados_jefes_familia_base_mision_".$datosBASEMISIONES->nombre_base."_".$bodega->responsable.".xls\"");
 }
 
 

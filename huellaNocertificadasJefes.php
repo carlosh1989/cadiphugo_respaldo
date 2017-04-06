@@ -20,8 +20,9 @@ new Eloquent();
 extract($_GET);
 extract($_POST);
 
+
 //JEFES SI CERTIFICADOS
-$jefeSI = Jefe::where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega_id)->where('huella_certificada',0)->get();
+$jefeSI = Jefe::where('base_misiones',$basemisiones)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega_id)->where('huella_certificada',$tipo)->get();
 $bodega = Bodega::where('id',$bodega_id)->first();
 $municipio = Municipio::where('id_municipio',$bodega->cod_municipio)->first();
 $parroquia = Parroquia::where('id_parrouia',$bodega->cod_parroquia)->first();
@@ -29,8 +30,18 @@ $parroquia = Parroquia::where('id_parrouia',$bodega->cod_parroquia)->first();
 $responsable = $bodega->responsable;
 $jefeSiExcel = array();
 
+$array = Array (
+        0 => Array (
+		    "TOTAL:",
+		   	$jefeSI->count(),
+        ),
+);
+$jefeSiExcel = array_merge($jefeSiExcel,$array);
+
 foreach ($jefeSI as $key => $jefe) 
 {
+	$datosCLAP = Clap2::where('clap_codigo',$jefe->clap)->first();
+	$datosBODEGA = Bodega::where('id',$jefe->bodega)->first();
 	$array = Array (
 	        0 => Array (
 			    $jefe->cedula,
@@ -39,37 +50,29 @@ foreach ($jefeSI as $key => $jefe)
 			    $parroquia->nombre_parroquia,
 			    $jefe->sector,
 			    $jefe->clap,
-	        ),
-	);
-	$jefeSiExcel = array_merge($jefeSiExcel,$array);
-}
-
-
-//JEFES SI CERTIFICADOS
-$jefeSI = Jefe::where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega_id)->where('huella_certificada',0)->get();
-$bodega = Bodega::where('id',$bodega_id)->first();
-$municipio = Municipio::where('id_municipio',$bodega->cod_municipio)->first();
-$parroquia = Parroquia::where('id_parrouia',$bodega->cod_parroquia)->first();
-
-$responsable = $bodega->responsable;
-$jefeSiExcel = array();
-
-foreach ($jefeSI as $key => $jefe) 
-{
-	$array = Array (
-	        0 => Array (
-			    $jefe->cedula,
-			    $jefe->nombre_apellido,
-			    $municipio->nombre_municipio,
-			    $parroquia->nombre_parroquia,
+			    $datosCLAP->clap_nombre,
+			    $datosCLAP->comunidad,
 			    $jefe->sector,
-			    $jefe->clap,
+			    $jefe->calle_avenida,
+			    $jefe->casa_edif_apto,
+			    $datosBODEGA->rason_social,
+			    $datosBODEGA->responsable,
+			    $datosBODEGA->direccion,
 	        ),
 	);
 	$jefeSiExcel = array_merge($jefeSiExcel,$array);
 }
- 
-header("Content-Disposition: attachment; filename=\"".$responsable."_Jefe_no_certificados.xls\"");
+
+if($tipo == 1)
+{
+	header("Content-Disposition: attachment; filename=\"certificados_base_mision_".$basemisiones.".xls\"");
+}
+elseif($tipo == 0) 
+{
+	header("Content-Disposition: attachment; filename=\"no_certificados_base_mision_".$basemisiones.".xls\"");
+}
+
+
 header("Content-Type: application/vnd.ms-excel;");
 header("Pragma: no-cache");
 header("Expires: 0");

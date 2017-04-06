@@ -31,6 +31,7 @@ $jefeSiExcel = array();
 
 foreach ($jefeSI as $key => $jefe) 
 {
+	$datosCLAP = Clap2::where('clap_codigo',$jefe->clap)->first();
 	$array = Array (
 	        0 => Array (
 			    $jefe->cedula,
@@ -39,6 +40,11 @@ foreach ($jefeSI as $key => $jefe)
 			    $parroquia->nombre_parroquia,
 			    $jefe->sector,
 			    $jefe->clap,
+			    $datosCLAP->clap_nombre,
+			    $datosCLAP->comunidad,
+			    $jefe->sector,
+			    $jefe->calle_avenida,
+			    $jefe->casa_edif_apto,
 	        ),
 	);
 	$jefeSiExcel = array_merge($jefeSiExcel,$array);

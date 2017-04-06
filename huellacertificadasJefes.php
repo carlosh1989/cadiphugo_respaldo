@@ -23,7 +23,9 @@ extract($_POST);
 
 //JEFES SI CERTIFICADOS
 
-$jefeSI = Jefe::where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega_id)->where('huella_certificada',1)->get();
+$jefeSI = Jefe::where('base_misiones',$basemisiones)->where('cod_municipio',$municipio)->where('cod_parroquia',$parroquia)->where('bodega',$bodega_id)->where('huella_certificada',1)->get();
+
+
 $bodega = Bodega::where('id',$bodega_id)->first();
 $municipio = Municipio::where('id_municipio',$bodega->cod_municipio)->first();
 $parroquia = Parroquia::where('id_parrouia',$bodega->cod_parroquia)->first();
@@ -69,5 +71,6 @@ foreach ($jefeSiExcel as $data)
     fputcsv($out, $data,"\t");
 }
 fclose($out);
+
 
 

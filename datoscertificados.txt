@@ -1,14 +1,15 @@
 ----------------------------
 bodega = 1139
-responsable =
+responsable = JESUS DIAZ ESPINOZA
 
-jefe de familia
-certificados = 
-no certificados = 
+jefe de familia = 359
+certificados = 0
+no certificados = 359
 
-carga familiar
-certificados = 
-no certificados =
+carga familiar = 240
+certificados = 1
+no certificados = 239
+
 ----------------------------
 
 ----------------------------

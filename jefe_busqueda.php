@@ -1,8 +1,4 @@
-
-    <script src="assets/js/jquery.min.js"></script>
-
-
-
+<script src="assets/js/jquery.min.js"></script>
 <script language="javascript">
 $(document).ready(function(){
    $("#municipio").change(function () {
@@ -34,65 +30,6 @@ $(document).ready(function(){
 </script>
 
 
-<script language="javascript">
-$(document).ready(function(){
-   $("#municipioB").change(function () {
-           $("#municipioB option:selected").each(function () {
-            idmunicipio = $(this).val();
-            $.post("parroquias.php", { idmunicipio:idmunicipio }, function(data){
-                $("#parroquiaB").html(data);
-            }); 
-            window.console&&console.log(idmunicipio);           
-        });
-   })
-
-});
-</script>
-
-<script language="javascript">
-$(document).ready(function(){
-   $("#parroquiaB").change(function () {
-           $("#parroquiaB option:selected").each(function () {
-            idparroquia = $(this).val();
-            $.post("bodegas.php", { idparroquia:idparroquia }, function(data){
-                $("#bodegaB").html(data);
-            }); 
-            window.console&&console.log(idparroquia);           
-        });
-   })
-
-});
-</script>
-
-<script language="javascript">
-$(document).ready(function(){
-   $("#municipioC").change(function () {
-           $("#municipioC option:selected").each(function () {
-            idmunicipio = $(this).val();
-            $.post("parroquias.php", { idmunicipio:idmunicipio }, function(data){
-                $("#parroquiaC").html(data);
-            }); 
-            window.console&&console.log(idmunicipio);           
-        });
-   })
-
-});
-</script>
-
-<script language="javascript">
-$(document).ready(function(){
-   $("#parroquiaC").change(function () {
-           $("#parroquiaC option:selected").each(function () {
-            idparroquia = $(this).val();
-            $.post("bodegas.php", { idparroquia:idparroquia }, function(data){
-                $("#bodegaC").html(data);
-            }); 
-            window.console&&console.log(idparroquia);           
-        });
-   })
-
-});
-</script>
 <?php
 //SECCIÓN DE CARGA DE LIBRERIAS Y MODELOSsss
 use DB\Eloquent;

@@ -47,18 +47,14 @@ foreach ($jefeSI as $key => $jefe)
 	        0 => Array (
 			    $jefe->cedula,
 			    $jefe->nombre_apellido,
-			    $municipio->nombre_municipio,
-			    $parroquia->nombre_parroquia,
-			    $jefe->sector,
-			    $jefe->clap,
-			    $datosCLAP->clap_nombre,
-			    $datosCLAP->comunidad,
-			    $jefe->sector,
+			    $jefe->sector,			    
 			    $jefe->calle_avenida,
 			    $jefe->casa_edif_apto,
-			    $datosBODEGA->rason_social,
+			    $jefe->clap,
+			    $datosCLAP->clap_nombre,
 			    $datosBODEGA->responsable,
 			    $datosBODEGA->direccion,
+
 	        ),
 	);
 	$jefeSiExcel = array_merge($jefeSiExcel,$array);
